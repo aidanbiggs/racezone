@@ -1,6 +1,7 @@
 @extends('layouts.app')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 @section('content')
+<div class="container">
     <h1> Create Race </h1>
     {!! Form::open(['action' => 'PostsController@store','method' => 'POST']) !!}
         <div class="form-group">
@@ -29,6 +30,7 @@
 
         {{Form::submit('Submit' , ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}
+</div>
 @endsection
 <script type="text/javascript">
 
@@ -37,7 +39,7 @@ $(document).ready(function(){
 
     $('#add').click(function(){  
         i++;
-        $('#dynamic_field').append('<tr id = "row' +i+ '"><td>{{Form::text("racerName","", ["class" => "form-control" , "placeholder"=> "Name" ,"name" => "racerName[]"])}}</td><td>{{Form::text("racerTime","", ["class" => "form-control" , "placeholder"=> "Time" , "name" => "racerTime[]"])}}<td><td>{{Form::button("X", ["class" => "btn btn-danger btn_remove", "name" => "remove", "id"=>"' +i + '"])}}</td></tr>');  
+        $('#dynamic_field').append('<tr id = "row' +i+ '"><td>{{Form::text("racerName","", ["class" => "form-control" , "placeholder"=> "Name" ,"name" => "racerName[]"])}}</td><td>{{Form::text("racerTime","", ["class" => "form-control" , "placeholder"=> "Time" , "name" => "racerTime[]"])}}<td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
     }); 
 
     $(document).on('click', '.btn_remove', function(){  

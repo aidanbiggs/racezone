@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts =  Post::groupBy('title')->orderBy('updated_at','desc')->paginate(10);
+        $posts =  Post::groupBy('title')->orderBy('updated_at','desc')->paginate(5);
         return view('posts.index')->with('posts', $posts);
     }
 
@@ -46,19 +46,28 @@ class PostsController extends Controller
 
         ]);
         $input = $request->all();
-        
-        foreach($input['racerName'] as $value){
+        $i = 0;
+        $timeArray = array();
+        foreach($input['racerTime'] as $value){
 
+            $timeArray[$i] = $value; 
+            $i++;
+        }
+
+        $i=0;
+        foreach($input['racerName'] as $value){
+            
             $post = new Post;
             $post->title = $request ->input('title');
             $post->body = $request->input('body');
             $post->racer_name = $value;
-            $post->race_time = "yesy";
+            $post->race_time = $timeArray[$i];
             $post->user_id = auth()->user()->id;
             $post->save();
-            
+            $i++;
             
         }
+
         return redirect('/posts')->with('success','Post Created');
     }
 
@@ -70,9 +79,15 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post =  Post::find($id);
+        $updatedAt = DB::table('posts')->select('updated_at')->where('id', $id)->get();
+        $updatedAt = json_decode(json_encode($updatedAt),true);//converts from object to single string
 
-        return view('posts.show')->with('post', $post);
+        $userId = DB::table('posts')->select('user_id')->where('id', $id)->get();
+        $userId = json_decode(json_encode($userId),true);
+
+        $posts = DB::table('posts')->where('updated_at',$updatedAt)->where('user_id',$userId)->get();
+        
+        return view('posts.show')->with('posts', $posts);
     }
 
     /**
@@ -135,7 +150,7 @@ class PostsController extends Controller
 
         DB::table('posts')->where('updated_at',$updatedAt)->where('user_id',$userId)->delete();
         
-        return redirect('/posts')->with('success','Post Removed');
+        return redirect('/dashboard')->with('success','Post Removed');
     }
 
     

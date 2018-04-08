@@ -18,10 +18,11 @@
                             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/posts/create">Create a Race!</a>
+                            @if(Auth::guest())
+                            <a class="nav-link" href="{{ route('login') }}">Create a Race</a>
+                            @else
+                            <a class="nav-link" href="/posts/create">Create a Race</a>
+                            @endif
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="/posts">View Races</a>
@@ -42,7 +43,7 @@
                                   </a>
   
                                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a href="/dashboard" class ="dropdown-item">Dashboard</a></li>
+                                        <li><a href="/dashboard" class ="dropdown-item">My Races</a></li>
                                      <li> <a class="dropdown-item" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
@@ -59,8 +60,3 @@
                   </div>
               </div>
           </nav>
-  
-
-  <!-- <ul class="nav navbar-nav navbar-right">
-      <li><a href="/posts/create">Create Post </a></li>
-    </ul> !-->

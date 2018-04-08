@@ -27,8 +27,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $posts = DB::table('posts')->groupBy('updated_at')->get();
+        $posts = DB::table('posts')->where('user_id',$user_id)->groupBy('updated_at')->get();
         return view('dashboard')->with('posts',$posts);
     }
 

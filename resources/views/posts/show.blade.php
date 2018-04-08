@@ -1,24 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="container">
     <a class ="btn btn-secondary" href="/posts" role = "button">Go Back</a>
-    <h1> {{$post->title}} </h1> 
-    <div>
-        {{$post->body}}
-    </div>
+    <div style="padding-top:3%"></div>
+    @foreach($posts as $key => $post)
+        @if($key ==0)        
+        <h1 style ="padding-bottom:1%"> {{$post->title}} </h1>
+        <h4 class ="lead" style ="padding-bottom:1%"> {{$post->body}} </h4>
+        @endif
+    @endforeach
     <hr>
-<small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-    <hr>
-    @if(!Auth::guest())
-        @if(Auth::user()->id ==$post->user_id)
-            
+    <table class = "table table-striped">
+        <tr>
+            <td><b>Racer Name</b></td>
+            <td><b>Racer Time (HH:MM:SS)<b></td>
+        </tr>
+        @foreach($posts as $post)
+        <tr>
+                <td name>{{$post->racer_name}}</td>
+                <td time>{{$post->race_time}} </td>
 
-            {{Form::open(['action' => ['PostsController@destroy', $post->id] ,'method' => 'POST','class' => 'pull-right'])}}
-            <!--<a href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>-->
-                {{Form::hidden('_method','DELETE')}}
-                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-            {{Form::close()}}
-         @endif
-    @endif
+        </tr>
+        @endforeach
+    </table>
+
+</div>
 @endsection
