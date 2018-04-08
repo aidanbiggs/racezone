@@ -1,3 +1,31 @@
+A website that allows users to create races for which they can log users times. The users times are submitted to a database and shared throughout the site. 
+
+## Home
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/home.PNG">
+
+## Create Race 
+
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/createbefore.PNG">
+
+## Create race - After clicking Add Racer multiple times
+
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/after.PNG">
+
+## User Dashboard
+
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/dashboard.PNG">
+
+## View Races
+
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/view1.PNG">
+
+## View Races - After selecting race
+
+<img src="https://raw.githubusercontent.com/aidanbiggs/racezone/master/images/view2.PNG">
+
+
+
+Made using Laravel:
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
